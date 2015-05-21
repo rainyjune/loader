@@ -13,6 +13,8 @@
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = file;
+    script.async = false;
+    script.defer = false;
     document.body.appendChild(script);
   }
   if(!Array.isArray) {
