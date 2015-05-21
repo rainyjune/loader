@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple Loader</title>
+    <style type="text/css">
+      p.scripts {
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="intro">simpleLoader1.js and simpleLoader2.js will be loaded after the page is ready, but the execution order of these scripts is not guaranteed.</p>
+    <script src="../simpleLoader.js"></script>
+    <script>
+      window.onload = initAll;
+      function initAll() {
+        loadJsFiles(["js/simpleLoader1.js", "js/simpleLoader2.js"]);
+      }
+    </script>
+  </body>
+</html>
