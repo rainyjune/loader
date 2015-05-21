@@ -1,10 +1,5 @@
 ﻿(function (window) {
-  if(!Array.isArray) {
-    Array.isArray = function (vArg) {
-      return Object.prototype.toString.call(vArg) === "[object Array]";
-    };
-  }
-
+  "use strict";
   function loadJsFiles(files) {
     if (typeof files === "string") {
       requireScript(files);
@@ -19,6 +14,11 @@
     script.type = 'text/javascript';
     script.src = file;
     document.body.appendChild(script);
+  }
+  if(!Array.isArray) {
+    Array.isArray = function (vArg) {
+      return Object.prototype.toString.call(vArg) === "[object Array]";
+    };
   }
   window.loadJsFiles = loadJsFiles;
 })(window);
