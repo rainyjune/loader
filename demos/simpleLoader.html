@@ -10,16 +10,48 @@
     </style>
   </head>
   <body>
-    <p id="intro">simpleLoader1.js and simpleLoader2.js will be loaded and executed immediately after the page is ready, but the execution order of these scripts is not guaranteed.</p>
-    <p>yellow.css will be loaded 2 seconds later after the page loaded.</p>
+    <p id="intro">simpleLoader1.js and simpleLoader2.js will be loaded and executed immediately after buttons were clicked</p>
     <script src="../simpleLoader.js"></script>
+    <p><button id="loadjs1">Load simpleLoader1.js</button><button id="loadjs2">Load simpleLoader2.js</button><button disabled id="showImg">Show Image</button><button id="loadcss">Load yellow.css</button></p>
+    <p><img id="image" alt="image" /></p>
     <script>
       window.onload = initAll;
       function initAll() {
-        require(["js/simpleLoader1.js", "js/simpleLoader2.js"]);
-        setTimeout(function() {
-          require("css/yellow.css");
-        }, 2000);
+        var js1btn = document.getElementById("loadjs1"),
+            js2btn = document.getElementById("loadjs2"),
+            btn = document.getElementById("showImg"),
+            cssbtn = document.getElementById("loadcss");
+        var img = document.getElementById("image");
+        var imgUrl = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
+        js1btn.onclick = function() {
+          require("js/simpleLoader1.js");
+        };
+        js2btn.onclick = function() {
+          require(["js/simpleLoader2.js"]);
+        };
+        btn.onclick = function() {
+          img.src = imgUrl;
+        };
+        cssbtn.onclick = function() {
+          require("css/yellow.css", function(){
+            var p = document.getElementById("intro");
+            var newP = document.createElement("p");
+            newP.className = "scripts";
+            newP.innerHTML = "yellow.css is loaded.";
+            document.body.insertBefore(newP, p);
+          });
+        };
+
+        setTimeout(function(){
+          require(imgUrl, function(){
+            var p = document.getElementById("intro");
+            var newP = document.createElement("p");
+            newP.className = "scripts";
+            newP.innerHTML = "This image file is loaded.";
+            document.body.insertBefore(newP, p);
+            btn.removeAttribute("disabled");
+          });
+        }, 3000);
       }
     </script>
   </body>
