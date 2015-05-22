@@ -24,10 +24,14 @@
         var img = document.getElementById("image");
         var imgUrl = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
         js1btn.onclick = function() {
-          require("js/simpleLoader1.js");
+          require("js/simpleLoader1.js", function() {
+            showLog("simpleLoader1.js is loaded.");            
+          });
         };
         js2btn.onclick = function() {
-          require(["js/simpleLoader2.js"]);
+          require(["js/simpleLoader2.js"], function(){
+            showLog("simpleLoader2.js is loaded.");
+          });
         };
         btn.onclick = function() {
           img.src = imgUrl;
@@ -52,6 +56,14 @@
             btn.removeAttribute("disabled");
           });
         }, 3000);
+      }
+
+      function showLog(msg) {
+        var p = document.getElementById("intro");
+        var newP = document.createElement("p");
+        newP.className = "scripts";
+        newP.innerHTML = msg;
+        document.body.insertBefore(newP, p);
       }
     </script>
   </body>
