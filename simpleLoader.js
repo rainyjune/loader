@@ -41,12 +41,21 @@
     }
   }
 
-  function requireScript(file) {
+  function requireScript(file, callback) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = file;
     script.async = false;
     script.defer = false;
+    if("onload" in script) {
+      script.onload = callback;
+    } else if ("onreadystatechange" in script) {
+      script.onreadystatechange = function() {
+        if (script.readyState === "complete") {
+          callback();
+        }
+      };
+    }
     document.body.appendChild(script);
   }
 
