@@ -50,12 +50,13 @@
     document.body.appendChild(script);
   }
 
-  function requireCSS(file) {
+  function requireCSS(file, callback) {
     var head = document.getElementsByTagName("head")[0];
     var css = document.createElement("link");
     css.type = "text/css";
     css.rel = "stylesheet";
     css.href = file;
+    css.onload = callback; 
     head.appendChild(css);
   }
 
