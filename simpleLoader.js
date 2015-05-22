@@ -11,32 +11,32 @@
     return ext;
   } 
 
-  function loadFile(file) {
+  function loadFile(file, callback) {
     var ext = getExtention(file);
     switch (ext) {
       case "js":
-        requireScript(file);
+        requireScript(file, callback);
         break;
       case "css":
-        requireCSS(file);
+        requireCSS(file, callback);
         break;
       case "png":
       case "jpg":
       case "jpeg":
       case "gif":
-        requireImage(file);
+        requireImage(file, callback);
         break;
       default:
         break;
     }
   }
 
-  function require(files) {
+  function require(files, callback) {
     if (typeof files === "string") {
-      loadFile(files);
+      loadFile(files, callback);
     } else if(Array.isArray(files)){
       for (var i = 0, len = files.length; i < len; i++) {
-        loadFile(files[i]);
+        loadFile(files[i], callback);
       }
     }
   }
@@ -57,6 +57,12 @@
     css.rel = "stylesheet";
     css.href = file;
     head.appendChild(css);
+  }
+
+  function requireImage(file, callback) {
+    var img = new Image();
+    img.onload = callback;
+    img.src = file;
   }
 
   if(!Array.isArray) {
