@@ -11,11 +11,15 @@
   </head>
   <body>
     <p id="intro">simpleLoader1.js and simpleLoader2.js will be loaded and executed immediately after the page is ready, but the execution order of these scripts is not guaranteed.</p>
+    <p>yellow.css will be loaded 2 seconds later after the page loaded.</p>
     <script src="../simpleLoader.js"></script>
     <script>
       window.onload = initAll;
       function initAll() {
-        loadJsFiles(["js/simpleLoader1.js", "js/simpleLoader2.js"]);
+        require(["js/simpleLoader1.js", "js/simpleLoader2.js"]);
+        setTimeout(function() {
+          require("css/yellow.css");
+        }, 2000);
       }
     </script>
   </body>
