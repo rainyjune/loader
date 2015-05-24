@@ -51,6 +51,8 @@
       script.onload = callback;
     } else if ("onreadystatechange" in script) {
       script.onreadystatechange = function() {
+        // readyState property 
+        // https://msdn.microsoft.com/en-us/library/ms534359(v=vs.85).aspx
         if (script.readyState === "complete") {
           callback();
         }
