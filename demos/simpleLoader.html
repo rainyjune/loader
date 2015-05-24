@@ -12,7 +12,15 @@
   <body>
     <p id="intro">simpleLoader1.js and simpleLoader2.js will be loaded and executed immediately after buttons were clicked</p>
     <script src="../simpleLoader.js"></script>
-    <p><button id="loadjs1">Load simpleLoader1.js</button><button id="loadjs2">Load simpleLoader2.js</button><button disabled id="showImg">Show Image</button><button id="loadcss">Load yellow.css</button></p>
+    <p>
+      <button id="loadjs1">Load simpleLoader1.js</button>
+      <button id="loadjs2">Load simpleLoader2.js</button>
+      <button disabled id="showImg">Show Image</button>
+      <button id="loadcss">Load yellow.css</button>
+    </p>
+    <p>
+      <button id="dependjs">load jquery.js and jquery.cookie.js</button>
+    </p>
     <p><img id="image" alt="image" /></p>
     <script>
       window.onload = initAll;
@@ -20,7 +28,9 @@
         var js1btn = document.getElementById("loadjs1"),
             js2btn = document.getElementById("loadjs2"),
             btn = document.getElementById("showImg"),
-            cssbtn = document.getElementById("loadcss");
+            cssbtn = document.getElementById("loadcss"),
+            dependjsbtn = document.getElementById("dependjs");
+            
         var img = document.getElementById("image");
         var imgUrl = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
         js1btn.onclick = function() {
@@ -45,6 +55,18 @@
             document.body.insertBefore(newP, p);
           });
         };
+        
+        dependjsbtn.onclick = function() {
+          var jq = "//code.jquery.com/jquery-1.11.3.min.js";
+          var jqc = "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js";
+          
+          require(jq, function(){
+            showLog("jQuery is loaded and executed.");
+            require(jqc, function() {
+              showLog("jquery.cookie.min.js is loaded and executed.");
+            });
+          });
+        };
 
         setTimeout(function(){
           require(imgUrl, function(){
@@ -55,7 +77,7 @@
             document.body.insertBefore(newP, p);
             btn.removeAttribute("disabled");
           });
-        }, 3000);
+        }, 0);
       }
 
       function showLog(msg) {
