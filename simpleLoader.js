@@ -50,10 +50,14 @@
     if("onload" in script) {
       script.onload = callback;
     } else if ("onreadystatechange" in script) {
+      // onreadystatechange is not a reliable way to detect script file load status
+      // It's your responsibility to check whether it's loaded successfully or not.
       script.onreadystatechange = function() {
+        var readyState = script.readyState;
         // readyState property 
         // https://msdn.microsoft.com/en-us/library/ms534359(v=vs.85).aspx
-        if (script.readyState === "complete") {
+        if (readyState === "complete" || readyState === "loaded") {
+          script.onreadystatechange = null;
           callback();
         }
       };
