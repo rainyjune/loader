@@ -66,13 +66,23 @@
     document.body.appendChild(script);
   }
 
-  function requireCSS(file, callback) {
+  /**
+   * Load CSS files. 
+   * Note the callback and errorCallback are only supported in modern browsers.
+   * Too few people used it.
+   * @param {string | array} file - CSS files that you want to load.
+   * @param {function} callback - success callback.
+   * @param {function} errorCallback - error callback.
+   * @return {undefined}
+   */
+  function requireCSS(file, callback, errorCallback) {
     var head = document.getElementsByTagName("head")[0];
     var css = document.createElement("link");
     css.type = "text/css";
     css.rel = "stylesheet";
     css.href = file;
     css.onload = callback; 
+    css.onerror = errorCallback;
     head.appendChild(css);
   }
 
