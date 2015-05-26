@@ -21,3 +21,25 @@ require(["js/simpleLoader1.js", "js/simpleLoader1.js"], function() {
   // simpleLoader1.js or simpleLoader1.js is not loaded.
 });
 ```
+
+Load a CSS file.
+```javascript
+require("yellow.css", function() {
+  // yellow.css  is loaded.
+}, function() {
+  // yellow.css is not loaded.
+});
+```
+
+Load JavaScript files that with dependencies.
+```javascript
+var jq = "//code.jquery.com/jquery-1.11.3.min.js";
+var jqc = "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js";
+
+require(jq, function(){
+  showLog("jQuery is loaded and executed.");
+  require(jqc, function() {
+    showLog("jquery.cookie.min.js is loaded and executed.");
+  });
+});
+```
