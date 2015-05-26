@@ -31,6 +31,14 @@ require("yellow.css", function() {
 });
 ```
 
+Preload an image file.
+```javascript
+var imgUrl = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
+require(imgUrl, function(){
+  // This file is loaded.
+});
+```
+
 Load JavaScript files that with dependencies.
 ```javascript
 var jq = "//code.jquery.com/jquery-1.11.3.min.js";
