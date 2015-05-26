@@ -23,6 +23,7 @@
     </p>
     <p>
       <button id="jserr">load script error</button>
+      <button id="imgerr">load image error</button>
     </p>
     <p><img id="image" alt="image" /></p>
     <script>
@@ -33,6 +34,7 @@
             btn = document.getElementById("showImg"),
             cssbtn = document.getElementById("loadcss"),
             jserrbtn = document.getElementById("jserr"),
+            imgerrbtn = document.getElementById("imgerr"),
             dependjsbtn = document.getElementById("dependjs");
             
         var img = document.getElementById("image");
@@ -76,6 +78,13 @@
             showLog("notexist.js is loaded");
           }, function() {
             showLog("notexist.js is not loaded");
+          });
+        };
+        imgerrbtn.onclick = function() {
+          require("http://baidu111ea.com/notexists.png", function() {
+              showLog("notexists.png is loaded.");
+          }, function(){
+              showLog("notexists.png is not loaded.");
           });
         };
 
