@@ -11,11 +11,11 @@
     return ext;
   } 
 
-  function loadFile(file, callback) {
+  function loadFile(file, callback, errorCallback) {
     var ext = getExtention(file);
     switch (ext) {
       case "js":
-        requireScript(file, callback);
+        requireScript(file, callback, errorCallback);
         break;
       case "css":
         requireCSS(file, callback);
@@ -31,17 +31,17 @@
     }
   }
 
-  function require(files, callback) {
+  function require(files, callback, errorCallback) {
     if (typeof files === "string") {
-      loadFile(files, callback);
+      loadFile(files, callback, errorCallback);
     } else if(Array.isArray(files)){
       for (var i = 0, len = files.length; i < len; i++) {
-        loadFile(files[i], callback);
+        loadFile(files[i], callback, errorCallback);
       }
     }
   }
 
-  function requireScript(file, callback) {
+  function requireScript(file, callback, errorCallback) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = file;
@@ -49,6 +49,7 @@
     script.defer = false;
     if("onload" in script) {
       script.onload = callback;
+      script.onerror = errorCallback;
     } else if ("onreadystatechange" in script) {
       // onreadystatechange is not a reliable way to detect script file load status
       // It's your responsibility to check whether it's loaded successfully or not.
