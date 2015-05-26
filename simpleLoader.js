@@ -18,13 +18,13 @@
         requireScript(file, callback, errorCallback);
         break;
       case "css":
-        requireCSS(file, callback);
+        requireCSS(file, callback, errorCallback);
         break;
       case "png":
       case "jpg":
       case "jpeg":
       case "gif":
-        requireImage(file, callback);
+        requireImage(file, callback, errorCallback);
         break;
       default:
         break;
@@ -81,14 +81,15 @@
     css.type = "text/css";
     css.rel = "stylesheet";
     css.href = file;
-    css.onload = callback; 
-    css.onerror = errorCallback;
+    css.onload = callback || null; 
+    css.onerror = errorCallback || null;
     head.appendChild(css);
   }
 
-  function requireImage(file, callback) {
+  function requireImage(file, callback, errorCallback) {
     var img = new Image();
-    img.onload = callback;
+    img.onload = callback || null;
+    img.onerror = errorCallback || null;
     img.src = file;
   }
 
