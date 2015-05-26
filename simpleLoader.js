@@ -86,6 +86,13 @@
     head.appendChild(css);
   }
 
+  /**
+   * Preload image files. 
+   * @param {string | array} file - Image files that you want to preload.
+   * @param {function} callback - success callback.
+   * @param {function} errorCallback - error callback.
+   * @return {undefined}
+   */
   function requireImage(file, callback, errorCallback) {
     var img = new Image();
     img.onload = callback || null;
