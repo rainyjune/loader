@@ -1,7 +1,7 @@
 # loader
 A simple resource loader, load resources files asynchronously.
 
-Examples
+## Examples
 
 Load a JavaScript files.
 
