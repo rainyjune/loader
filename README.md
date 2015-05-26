@@ -1,6 +1,16 @@
 # loader
 A simple resource loader, load resources files asynchronously.
 
+**Supported Browsers**
+
+* IE 9+
+* Chrome 14+
+* Firefox 2+
+* Safari 4+
+* Opera 11+
+* Android 2.3+
+* iOS 3.2+
+
 ## Examples
 
 Load a JavaScript files.
