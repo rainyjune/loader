@@ -39,6 +39,7 @@ QUnit.test("Load jQuery and jquery cookie plugin from CDN", function(assert) {
   }, function() {
     assert.ok(false, "jquery is loaded");
     done1();
+    done2();
   });
 });
 QUnit.test("Load an invalid JavaScript file", function(assert) {
