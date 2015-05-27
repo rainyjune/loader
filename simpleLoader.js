@@ -32,12 +32,13 @@
   }
 
   function require(files, callback, errorCallback) {
+    
     if (typeof files === "string") {
-      loadFile(files, callback, errorCallback);
+      loadFile(getResourceFileUrl(files), callback, errorCallback);
     } else if(Array.isArray(files)){
       var len = files.length;
       if (len === 1) {
-        loadFile(files[0], callback, errorCallback);
+        loadFile(getResourceFileUrl(files[0]), callback, errorCallback);
         return ;
       }
       var jsCount = 0,
@@ -60,7 +61,7 @@
         var ext = getExtention(file);
         if (ext === "js") {
           jsCount++;
-          requireScript(file, function() {
+          requireScript(getResourceFileUrl(file), function() {
             jsCompletedCount++;
             jsSuccessCount++;
             checkProgress();
@@ -70,7 +71,7 @@
             checkProgress();
           });
         } else {
-          loadFile(file, callback, errorCallback);
+          loadFile(getResourceFileUrl(file), callback, errorCallback);
         }
       }
     }
@@ -133,6 +134,24 @@
     img.onload = callback || null;
     img.onerror = errorCallback || null;
     img.src = file;
+  }
+  
+  function getCurrentScript() {
+    return document.getElementById("entry");
+  }
+  
+  function getCurrentScriptPath() {
+    var scriptSrc = getCurrentScript().src;
+    var path = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
+    return path;
+  }
+  
+  function getResourceFileUrl(file) {
+    if (file.indexOf("//") === 0 || file.indexOf("http://") === 0 || file.indexOf("https://") === 0) {
+      return file;
+    }
+    var path = getCurrentScriptPath() + "/";
+    return path + file;
   }
 
   if(!Array.isArray) {
