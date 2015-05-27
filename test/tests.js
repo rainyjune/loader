@@ -52,6 +52,28 @@ QUnit.test("Load an invalid JavaScript file", function(assert) {
     done();
   });
 });
+QUnit.test("Load three JavaScript files using require(['fn1.js', 'fn2.js', 'fn3.js']", function(assert) {
+  var done = assert.async();
+  var js1 = "fn1.js", js2 = "fn2.js", js3 = "fn3.js";
+  require([js1, js2, js3], function() {
+    assert.ok((typeof fn1 === "function") && (typeof fn2 === "function") && (typeof fn3 === "function") , "The success callback function is called. All three JS file were loaded successfully.");
+    done();
+  }, function() {
+    assert.ok(false, "All three JS file were loaded successfully.");
+    done();
+  });
+});
+QUnit.test("Load JavaScript files using require(['fn1.js', 'fn2.js', 'fn4.js'], but fn4.js does not exists", function(assert) {
+  var done = assert.async();
+  var js1 = "fn1.js", js2 = "fn2.js", js3 = "fn4.js";
+  require([js1, js2, js3], function() {
+    assert.ok((typeof fn1 === "function") && (typeof fn2 === "function") && (typeof fn4 === "function") , "All three JS file were loaded successfully.");
+    done();
+  }, function() {
+    assert.ok((typeof fn1 === "function") && (typeof fn2 === "function") && (typeof fn4 === "undefined"), "The error callback function is called. fn1.js and fn2.js were loaded, but fn4.js not.");
+    done();
+  });
+});
 QUnit.test("Load a CSS file", function(assert) {
   var done = assert.async();
   var url = "test.css";
