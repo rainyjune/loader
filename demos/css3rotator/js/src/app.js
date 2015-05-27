@@ -1,4 +1,4 @@
-require("zepto.min.js", function(){
+require("zepto.js", function(){
   require(["zepto.touch.js", "slider.js"], initApp);
 });
 function initApp(){
