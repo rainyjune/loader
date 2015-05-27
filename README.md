@@ -13,7 +13,7 @@ require("js/simpleLoader1.js", function() {
 });
 ```
 
-Load mutiple JavaScript files. Note that the success callback function and error callback function will be triggered for each file, and the execution order is not guaranteed.  
+Load mutiple JavaScript files. Note that the success callback function and error callback function will be triggered after these file loading finished, and the execution order is not guaranteed.  
 ```javascript
 require(["js/simpleLoader1.js", "js/simpleLoader2.js"], function() {
   // Both simpleLoader1.js and simpleLoader2.js were loaded.
