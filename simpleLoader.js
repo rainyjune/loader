@@ -36,8 +36,42 @@
       loadFile(files, callback, errorCallback);
     } else if(Array.isArray(files)){
       var len = files.length;
+      if (len === 1) {
+        loadFile(files[0], callback, errorCallback);
+        return ;
+      }
+      var jsCount = 0,
+          jsCompletedCount = 0,
+          jsSuccessCount = 0,
+          jsErrorCount = 0;
+
+      var checkProgress = function() {
+        if (jsCompletedCount === jsCount) {
+          if (jsSuccessCount === jsCount) {
+            callback();
+          } else {
+            errorCallback();
+          }
+        }
+      };
+
       for (var i = 0; i < len; i++) {
-        loadFile(files[i], callback, errorCallback);
+        var file = files[i];
+        var ext = getExtention(file);
+        if (ext === "js") {
+          jsCount++;
+          requireScript(file, function() {
+            jsCompletedCount++;
+            jsSuccessCount++;
+            checkProgress();
+          }, function() {
+            jsCompletedCount++;
+            jsErrorCount++;
+            checkProgress();
+          });
+        } else {
+          loadFile(file, callback, errorCallback);
+        }
       }
     }
   }
