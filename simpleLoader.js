@@ -35,7 +35,8 @@
     if (typeof files === "string") {
       loadFile(files, callback, errorCallback);
     } else if(Array.isArray(files)){
-      for (var i = 0, len = files.length; i < len; i++) {
+      var len = files.length;
+      for (var i = 0; i < len; i++) {
         loadFile(files[i], callback, errorCallback);
       }
     }
