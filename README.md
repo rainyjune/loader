@@ -1,6 +1,34 @@
 # loader
 A simple resource loader, load resources files asynchronously.
 
+## Usage 
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Sample Project</title>
+  </head>
+  <body>
+    <h1>My Sample Project</h1>
+    <script src="simpleLoader.js"></script>
+    <!-- id="entry" tells simpleLoader to load app.js after simpleLoader.js loads. -->
+    <script id="entry" src="app.js"></script>
+  </body>
+</html>
+```
+
+Inside the app.js, you can use require() to load any other scripts you need to run. This ensures a single entry point.
+```javascript
+require("zepto.js", function(){
+  // zepto.js is loaded.
+  require(["zepto.touch.js", "slider.js"], initApp);
+});
+function initApp(){
+  // This function is called when zepto.touch.js and slider.js are loaded.
+}
+```
+
 ## Examples
 
 Load a JavaScript files.
