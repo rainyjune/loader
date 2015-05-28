@@ -65,7 +65,7 @@
             checkProgress();
           });
         } else {
-          loadFile(getResourceFileUrl(file), callback, errorCallback);
+          loadFile(getResourceFileUrl(file));
         }
       }
     }
