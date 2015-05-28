@@ -20,12 +20,6 @@
       case "css":
         requireCSS(file, callback, errorCallback);
         break;
-      case "png":
-      case "jpg":
-      case "jpeg":
-      case "gif":
-        requireImage(file, callback, errorCallback);
-        break;
       default:
         break;
     }
@@ -122,20 +116,6 @@
     head.appendChild(css);
   }
 
-  /**
-   * Preload image files. 
-   * @param {string | array} file - Image files that you want to preload.
-   * @param {function} callback - success callback.
-   * @param {function} errorCallback - error callback.
-   * @return {undefined}
-   */
-  function requireImage(file, callback, errorCallback) {
-    var img = new Image();
-    img.onload = callback || null;
-    img.onerror = errorCallback || null;
-    img.src = file;
-  }
-  
   function getCurrentScript() {
     return document.getElementById("entry");
   }
