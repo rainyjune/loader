@@ -97,31 +97,21 @@
   }
 
   /**
-   * Load CSS files. 
-   * Note the callback and errorCallback are only supported in modern browsers.
-   * Too few people used it.
-   * @param {string | array} file - CSS files that you want to load.
-   * @param {function} callback - success callback.
-   * @param {function} errorCallback - error callback.
+   * Load CSS files. No callbacks were supported. Too few people need it.
+   * @param {string} file - A CSS file that you want to load.
    * @return {undefined}
    */
-  function requireCSS(file, callback, errorCallback) {
+  function requireCSS(file) {
     var head = document.getElementsByTagName("head")[0];
     var css = document.createElement("link");
     css.type = "text/css";
     css.rel = "stylesheet";
     css.href = file;
-    css.onload = callback || null; 
-    css.onerror = errorCallback || null;
     head.appendChild(css);
   }
 
-  function getCurrentScript() {
-    return document.getElementById("entry");
-  }
-  
   function getCurrentScriptPath() {
-    var scriptSrc = getCurrentScript().src;
+    var scriptSrc = document.getElementById("entry").src;
     var path = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
     return path;
   }
