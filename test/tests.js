@@ -45,6 +45,7 @@ QUnit.test("Load jQuery and jquery cookie plugin from CDN", function(assert) {
 QUnit.test("Load an invalid JavaScript file", function(assert) {
   var done = assert.async();
   var url = "local2.js";
+  QUnit.config.current.ignoreGlobalErrors = true;
   require(url, function() {
     assert.ok(false, "local2.js is not loaded and executed!");
     done();
@@ -67,6 +68,7 @@ QUnit.test("Load three JavaScript files using require(['fn1.js', 'fn2.js', 'fn3.
 QUnit.test("Load JavaScript files using require(['fn1.js', 'fn2.js', 'fn4.js'], but fn4.js does not exists", function(assert) {
   var done = assert.async();
   var js1 = "fn1.js", js2 = "fn2.js", js3 = "fn4.js";
+  QUnit.config.current.ignoreGlobalErrors = true;
   require([js1, js2, js3], function() {
     assert.ok((typeof fn1 === "function") && (typeof fn2 === "function") && (typeof fn4 === "function") , "All three JS file were loaded successfully.");
     done();

@@ -6,6 +6,20 @@
     <link rel="stylesheet" href="qunit/qunit-1.18.0.css">
   </head>
   <body>
+    <script>
+    window.onerror = function(message, filename, lineno, colno, error) {
+          if(error != null)
+          {
+            console.log("ERROR:", error.stack);
+              //handle the error with stacktrace in error.stack
+          }
+          else
+          {
+            console.log("ERROR2", message, filename, lineno, colno)
+              //sadly only 'message', 'filename' and 'lineno' work here
+          }
+      };
+    </script>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="qunit/qunit-1.18.0.js"></script>
