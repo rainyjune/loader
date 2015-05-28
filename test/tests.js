@@ -78,22 +78,11 @@ QUnit.test("Load JavaScript files using require(['fn1.js', 'fn2.js', 'fn4.js'], 
 QUnit.test("Load a CSS file", function(assert) {
   var done = assert.async();
   var url = "test.css";
-  require(url, function(){
-    assert.ok(true, "test.css is loaded");
+  require(url);
+  setTimeout(function(){
+    var bgcolor = window.getComputedStyle(document.getElementsByTagName("body")[0], null).backgroundColor;
+    var result = bgcolor === "rgb(128, 128, 128)" || bgcolor === "gray";
+    assert.ok(result, "test.css is loaded.");
     done();
-  }, function() {
-    assert.ok(false, "test.css is loaded");
-    done();
-  });
-});
-QUnit.test("Load an invalid CSS file", function(assert) {
-  var done = assert.async();
-  var url = "test1.css";
-  require(url, function(){
-    assert.ok(false, "test1.css is not loaded");
-    done();
-  }, function() {
-    assert.ok(true, "test1.css is not loaded");
-    done();
-  });
+  }, 2000); 
 });
