@@ -86,3 +86,14 @@ QUnit.test("Load a CSS file", function(assert) {
     done();
   }, 2000); 
 });
+QUnit.test("Load two JS files and a CSS file", function(assert) {
+  var done = assert.async();
+  var url1 = "module2-1.js", url2 = "module2-2.js", url3 = "module2.css";
+  require([url1, url2, url3], function() {
+    assert.ok(true, "The success callback is called.");
+    done();
+  }, function() {
+    assert.ok(false, "The success callback is called.");
+    done();
+  });
+});
