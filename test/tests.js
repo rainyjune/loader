@@ -97,25 +97,3 @@ QUnit.test("Load an invalid CSS file", function(assert) {
     done();
   });
 });
-QUnit.test("Preload an image file", function(assert) {
-  var done = assert.async();
-  var url = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
-  require(url, function() {
-    assert.ok(true, "The png file is loaded");
-    done();
-  }, function() {
-    assert.ok(false, "The png file is loaded");
-    done();
-  });
-});
-QUnit.test("Preload an invalid image file", function(assert) {
-  var done = assert.async();
-  var url = "test.png";
-  require(url, function() {
-    assert.ok(false, "The png file is not loaded");
-    done();
-  }, function() {
-    assert.ok(true, "The png file is not loaded");
-    done();
-  });
-});
