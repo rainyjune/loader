@@ -55,14 +55,6 @@ Load a CSS file. Note that no callbacks are supported, few people need callbacks
 require("yellow.css");
 ```
 
-Preload an image file.
-```javascript
-var imgUrl = "http://images.apple.com/v/home/bv/images/home_hero_iphone_medium.png";
-require(imgUrl, function(){
-  // This file is loaded.
-});
-```
-
 Load JavaScript files that with dependencies.
 ```javascript
 var jq = "//code.jquery.com/jquery-1.11.3.min.js";
@@ -86,8 +78,3 @@ require(jq, function(){
 * Opera 11+
 * Android 2.3+
 * iOS 3.2+
-
-**Known Issues**
-
-* The success callback instead of error callback will be called if an invalid CSS file is loaded in IE, the reason is that IE does not support the `error` event. This is a browser bug:
-  https://connect.microsoft.com/IE/feedback/details/1171082/support-the-error-event-on-link
