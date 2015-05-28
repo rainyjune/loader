@@ -50,13 +50,9 @@ require(["js/simpleLoader1.js", "js/simpleLoader2.js"], function() {
 });
 ```
 
-Load a CSS file. Note that callbacks only works in a few browsers.
+Load a CSS file. Note that no callbacks are supported, few people need callbacks.
 ```javascript
-require("yellow.css", function() {
-  // yellow.css  is loaded.
-}, function() {
-  // yellow.css is not loaded.
-});
+require("yellow.css");
 ```
 
 Preload an image file.
