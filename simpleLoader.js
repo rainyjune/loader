@@ -111,7 +111,11 @@
   }
 
   function getCurrentScriptPath() {
-    var scriptSrc = document.getElementById("entry").src;
+    var entryScript = document.getElementById("entry");
+    if (!entryScript) {
+      return '.';
+    }
+    var scriptSrc = entryScript.src;
     var path = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
     return path;
   }
